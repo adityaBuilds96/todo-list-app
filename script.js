@@ -1,6 +1,6 @@
 // ================================
 // TO-DO LIST - JAVASCRIPT
-// Week 5: Mark Tasks as Completed
+// Week 6: Task Completion Animations
 // ================================
 
 // Grab elements from HTML
@@ -42,17 +42,27 @@ function addTask() {
     // What happens when checkbox is clicked
     checkbox.addEventListener('change', function() {
         if (checkbox.checked) {
-            // Mark as completed
-            listItem.classList.add('completed');
-            taskSpan.style.textDecoration = 'line-through';
-            taskSpan.style.color = '#6c757d';
+            // Add completing animation first
+            listItem.classList.add('completing');
+
+            // After animation, mark as completed
+            setTimeout(function() {
+                listItem.classList.remove('completing');
+                listItem.classList.add('completed');
+            }, 400);
+
             completeButton.textContent = '↩️ Undo';
             completeButton.style.background = '#6c757d';
+
         } else {
-            // Mark as not completed
-            listItem.classList.remove('completed');
-            taskSpan.style.textDecoration = 'none';
-            taskSpan.style.color = '#333';
+            // Undo completion
+            listItem.classList.add('undoing');
+
+            setTimeout(function() {
+                listItem.classList.remove('undoing');
+                listItem.classList.remove('completed');
+            }, 400);
+
             completeButton.textContent = '✅ Complete';
             completeButton.style.background = '#28a745';
         }
@@ -95,20 +105,16 @@ function addTask() {
 
     // What happens when Delete is clicked
     deleteButton.addEventListener('click', function() {
-        // Animate out before removing
-        listItem.style.animation = 'taskSlideOut 0.3s ease-out';
-        listItem.style.opacity = '0';
-        listItem.style.transform = 'translateX(20px)';
+        listItem.classList.add('deleting');
         setTimeout(function() {
             listItem.remove();
-            // Show empty state if no tasks left
             if (taskList.children.length === 0) {
                 const emptyState = document.createElement('li');
                 emptyState.className = 'empty-state';
                 emptyState.innerHTML = '<p>No tasks yet. Add one to get started! 🚀</p>';
                 taskList.appendChild(emptyState);
             }
-        }, 300);
+        }, 400);
     });
 
     // Put everything together

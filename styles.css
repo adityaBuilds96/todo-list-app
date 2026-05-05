@@ -1,7 +1,7 @@
 /* ====================================
    TO-DO LIST APPLICATION STYLES
    Modern, Clean & Responsive Design
-   With Smooth Animations!
+   Week 6: Task Completion Animations
    ==================================== */
 
 /* Reset default styles */
@@ -176,7 +176,7 @@ header p {
     height: 20px;
     margin-right: 12px;
     cursor: pointer;
-    accent-color: #667eea;
+    accent-color: #28a745;
     flex-shrink: 0;
     transition: all 0.3s ease;
 }
@@ -188,8 +188,6 @@ header p {
 /* ====================================
    TASK ITEM ANIMATION
    ==================================== */
-
-/* Individual Task Item */
 .task-item {
     background: #f8f9fa;
     padding: 15px 20px;
@@ -198,12 +196,12 @@ header p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     border-left: 4px solid #667eea;
     animation: taskSlideIn 0.4s ease-out;
 }
 
-/* Smooth Task Slide In Animation */
+/* Smooth Task Slide In */
 @keyframes taskSlideIn {
     0% {
         opacity: 0;
@@ -226,19 +224,123 @@ header p {
 }
 
 /* ====================================
+   COMPLETING ANIMATION
+   Plays when you first click complete
+   ==================================== */
+.task-item.completing {
+    animation: completingPulse 0.4s ease-out;
+}
+
+@keyframes completingPulse {
+    0% {
+        transform: scale(1);
+        background: #f8f9fa;
+    }
+    50% {
+        transform: scale(1.02);
+        background: #d4edda;
+        box-shadow: 0 0 20px rgba(40, 167, 69, 0.4);
+    }
+    100% {
+        transform: scale(1);
+        background: #d4edda;
+    }
+}
+
+/* ====================================
    COMPLETED TASK STYLING
    ==================================== */
 .task-item.completed {
-    opacity: 0.6;
-    border-left-color: #28a745;
     background: #f0fff4;
+    border-left-color: #28a745;
+    opacity: 0.75;
     transition: all 0.4s ease;
+    animation: completedSettle 0.4s ease-out;
+}
+
+@keyframes completedSettle {
+    0% {
+        background: #d4edda;
+        box-shadow: 0 0 20px rgba(40, 167, 69, 0.4);
+    }
+    100% {
+        background: #f0fff4;
+        box-shadow: none;
+    }
 }
 
 .task-item.completed .task-text {
     text-decoration: line-through;
     color: #6c757d;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
+}
+
+.task-item.completed .task-checkbox {
+    animation: checkboxPop 0.3s ease-out;
+}
+
+@keyframes checkboxPop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.4);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ====================================
+   UNDO ANIMATION
+   ==================================== */
+.task-item.undoing {
+    animation: undoPulse 0.4s ease-out;
+}
+
+@keyframes undoPulse {
+    0% {
+        background: #f0fff4;
+        border-left-color: #28a745;
+    }
+    50% {
+        background: #fff3cd;
+        border-left-color: #ffc107;
+        transform: scale(1.01);
+    }
+    100% {
+        background: #f8f9fa;
+        border-left-color: #667eea;
+    }
+}
+
+/* ====================================
+   DELETE ANIMATION
+   ==================================== */
+.task-item.deleting {
+    animation: deleteSlideOut 0.4s ease-out forwards;
+}
+
+@keyframes deleteSlideOut {
+    0% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+        max-height: 100px;
+        margin-bottom: 12px;
+        padding: 15px 20px;
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateX(30px) scale(0.95);
+        background: #f8d7da;
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(60px) scale(0.9);
+        max-height: 0;
+        margin-bottom: 0;
+        padding: 0;
+    }
 }
 
 /* Task Text */
@@ -249,7 +351,7 @@ header p {
     word-wrap: break-word;
     padding-right: 15px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
 }
 
 .task-text:hover {
