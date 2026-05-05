@@ -1,6 +1,7 @@
 /* ====================================
    TO-DO LIST APPLICATION STYLES
    Modern, Clean & Responsive Design
+   With Smooth Animations!
    ==================================== */
 
 /* Reset default styles */
@@ -29,18 +30,20 @@ body {
     border-radius: 15px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     overflow: hidden;
-    animation: slideIn 0.5s ease-out;
+    animation: slideIn 0.6s ease-out;
 }
 
-/* Slide-in animation */
+/* ====================================
+   PAGE LOAD ANIMATION
+   ==================================== */
 @keyframes slideIn {
-    from {
+    0% {
         opacity: 0;
-        transform: translateY(-30px);
+        transform: translateY(-40px) scale(0.95);
     }
-    to {
+    100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
 
@@ -56,11 +59,25 @@ header h1 {
     font-size: 2.5em;
     margin-bottom: 10px;
     font-weight: 600;
+    animation: fadeInDown 0.8s ease-out;
 }
 
 header p {
     opacity: 0.9;
     font-size: 1.1em;
+    animation: fadeInDown 1s ease-out;
+}
+
+/* Header text animation */
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Input Section */
@@ -68,6 +85,17 @@ header p {
     padding: 30px;
     background: #f8f9fa;
     border-bottom: 2px solid #e9ecef;
+    animation: fadeIn 1s ease-out;
+}
+
+/* Simple fade in */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .input-group {
@@ -92,6 +120,7 @@ header p {
     outline: none;
     border-color: #667eea;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: scale(1.01);
 }
 
 #taskInput::placeholder {
@@ -113,12 +142,12 @@ header p {
 }
 
 #addButton:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
 }
 
 #addButton:active {
-    transform: translateY(0);
+    transform: translateY(0px) scale(0.97);
 }
 
 /* Task Display Section */
@@ -139,6 +168,10 @@ header p {
     list-style: none;
 }
 
+/* ====================================
+   TASK ITEM ANIMATION (Most Important!)
+   ==================================== */
+
 /* Individual Task Item */
 .task-item {
     background: #f8f9fa;
@@ -150,34 +183,44 @@ header p {
     align-items: center;
     transition: all 0.3s ease;
     border-left: 4px solid #667eea;
-    animation: taskSlideIn 0.3s ease-out;
+    animation: taskSlideIn 0.4s ease-out;
 }
 
+/* Smooth Task Slide In Animation */
 @keyframes taskSlideIn {
-    from {
+    0% {
         opacity: 0;
-        transform: translateX(-20px);
+        transform: translateY(15px) scale(0.95);
     }
-    to {
+    60% {
+        transform: translateY(-5px) scale(1.01);
+    }
+    100% {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateY(0) scale(1);
     }
 }
 
+/* Task hover effect */
 .task-item:hover {
-    transform: translateX(5px);
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+    transform: translateX(8px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    background: #f0f0f0;
 }
 
-/* Completed Task */
+/* ====================================
+   COMPLETED TASK ANIMATION
+   ==================================== */
 .task-item.completed {
     opacity: 0.6;
     border-left-color: #28a745;
+    transition: all 0.4s ease;
 }
 
 .task-item.completed .task-text {
     text-decoration: line-through;
     color: #6c757d;
+    transition: all 0.3s ease;
 }
 
 /* Task Text */
@@ -187,6 +230,7 @@ header p {
     font-size: 16px;
     word-wrap: break-word;
     padding-right: 15px;
+    transition: all 0.3s ease;
 }
 
 /* Task Action Buttons */
@@ -207,121 +251,4 @@ header p {
     transition: all 0.3s ease;
 }
 
-/* Complete Button */
-.complete-btn {
-    background: #28a745;
-    color: white;
-}
-
-.complete-btn:hover {
-    background: #218838;
-    transform: scale(1.05);
-}
-
-/* Delete Button */
-.delete-btn {
-    background: #dc3545;
-    color: white;
-}
-
-.delete-btn:hover {
-    background: #c82333;
-    transform: scale(1.05);
-}
-
-/* Empty State */
-.empty-state {
-    text-align: center;
-    padding: 60px 20px;
-    color: #6c757d;
-    list-style: none;
-}
-
-.empty-state p {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-}
-
-/* ====================================
-   RESPONSIVE DESIGN
-   Mobile, Tablet & Desktop
-   ==================================== */
-
-/* Tablet and smaller (below 768px) */
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    .container {
-        margin: 10px 0;
-    }
-
-    header h1 {
-        font-size: 2em;
-    }
-
-    header p {
-        font-size: 1em;
-    }
-
-    .input-section {
-        padding: 20px;
-    }
-
-    .task-display {
-        padding: 20px;
-    }
-
-    .task-display h2 {
-        font-size: 1.3em;
-    }
-}
-
-/* Mobile (below 480px) */
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 1.8em;
-    }
-
-    header p {
-        font-size: 0.9em;
-    }
-
-    .input-group {
-        flex-direction: column;
-    }
-
-    #taskInput,
-    #addButton {
-        width: 100%;
-    }
-
-    .task-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-
-    .task-actions {
-        width: 100%;
-        justify-content: flex-end;
-    }
-
-    .complete-btn,
-    .delete-btn {
-        flex: 1;
-    }
-}
-
-/* Extra small devices (below 320px) */
-@media (max-width: 320px) {
-    header h1 {
-        font-size: 1.5em;
-    }
-
-    .input-section,
-    .task-display {
-        padding: 15px;
-    }
-}
+/* Complete 
