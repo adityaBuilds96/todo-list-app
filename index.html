@@ -7,50 +7,132 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Background Quotes -->
+    <div class="bg-quote">Dream Big Work Hard</div>
+    <div class="bg-quote">Stay Focused Stay Humble</div>
+    <div class="bg-quote">Make It Happen</div>
+
+    <div id="particles-container"></div>
     <div id="confetti-container"></div>
 
-    <div class="container">
+    <div class="container glass">
+
+        <!-- HEADER -->
         <header>
             <div class="header-top">
                 <h1>📝 My To-Do List</h1>
-                <button id="darkModeToggle" class="dark-mode-btn">🌙</button>
+                <div class="header-buttons">
+                    <button id="wallpaperToggle" class="icon-btn">🖼️</button>
+                    <button id="themeToggle" class="icon-btn">🎨</button>
+                    <button id="darkModeToggle" class="icon-btn">🌙</button>
+                </div>
             </div>
-            <p>Stay organized and get things done!</p>
+            <p id="motivationalQuote">Stay organized and get things done!</p>
             <div class="task-stats">
                 <span class="stat">📋 Total: <strong id="totalTasks">0</strong></span>
                 <span class="stat">✅ Done: <strong id="completedTasks">0</strong></span>
                 <span class="stat">⏳ Pending: <strong id="pendingTasks">0</strong></span>
+                <span class="stat">🔥 Streak: <strong id="streakCount">0</strong> days</span>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
             </div>
         </header>
 
-        <section class="input-section">
+        <!-- WALLPAPER PICKER -->
+        <div id="wallpaperPicker" class="wallpaper-picker hidden">
+            <button class="wallpaper-option wp-none" data-wallpaper="none" title="Default"></button>
+            <button class="wallpaper-option wp-mountain" data-wallpaper="mountain" title="Mountain"></button>
+            <button class="wallpaper-option wp-ocean-bg" data-wallpaper="ocean" title="Ocean"></button>
+            <button class="wallpaper-option wp-forest-bg" data-wallpaper="forest" title="Forest"></button>
+            <button class="wallpaper-option wp-city-bg" data-wallpaper="city" title="City"></button>
+            <button class="wallpaper-option wp-galaxy-bg" data-wallpaper="galaxy" title="Galaxy"></button>
+            <button class="wallpaper-option wp-sunset-bg" data-wallpaper="sunset" title="Sunset"></button>
+        </div>
+
+        <!-- THEME PICKER -->
+        <div id="themePicker" class="theme-picker hidden">
+            <button class="theme-option" data-theme="purple" style="background: linear-gradient(135deg, #667eea, #764ba2)"></button>
+            <button class="theme-option" data-theme="ocean" style="background: linear-gradient(135deg, #2193b0, #6dd5ed)"></button>
+            <button class="theme-option" data-theme="sunset" style="background: linear-gradient(135deg, #f12711, #f5af19)"></button>
+            <button class="theme-option" data-theme="forest" style="background: linear-gradient(135deg, #134e5e, #71b280)"></button>
+            <button class="theme-option" data-theme="galaxy" style="background: linear-gradient(135deg, #0f0c29, #302b63)"></button>
+            <button class="theme-option" data-theme="rose" style="background: linear-gradient(135deg, #ee9ca7, #ffdde1)"></button>
+        </div>
+
+        <!-- INPUT SECTION -->
+        <section class="input-section glass-inner">
             <div class="input-group">
-                <input 
-                    type="text" 
-                    id="taskInput" 
-                    placeholder="Enter a new task..."
-                >
+                <input type="text" id="taskInput" placeholder="Enter a new task...">
+                <button id="voiceButton" class="voice-btn">🎤</button>
                 <select id="prioritySelect">
                     <option value="low">🟢 Low</option>
                     <option value="medium" selected>🟡 Medium</option>
                     <option value="high">🔴 High</option>
                 </select>
+                <select id="categorySelect">
+                    <option value="personal">👤 Personal</option>
+                    <option value="work">💼 Work</option>
+                    <option value="shopping">🛒 Shopping</option>
+                    <option value="health">💪 Health</option>
+                </select>
                 <button id="addButton">Add Task</button>
             </div>
             <div class="search-group">
-                <input 
-                    type="text" 
-                    id="searchInput" 
-                    placeholder="🔍 Search tasks..."
-                >
+                <input type="text" id="searchInput" placeholder="🔍 Search tasks...">
                 <div class="filter-buttons">
                     <button class="filter-btn active" data-filter="all">All</button>
                     <button class="filter-btn" data-filter="pending">Pending</button>
                     <button class="filter-btn" data-filter="completed">Completed</button>
                 </div>
             </div>
+            <div class="category-tabs">
+                <button class="cat-tab active" data-category="all">📋 All</button>
+                <button class="cat-tab" data-category="personal">👤 Personal</button>
+                <button class="cat-tab" data-category="work">💼 Work</button>
+                <button class="cat-tab" data-category="shopping">🛒 Shopping</button>
+                <button class="cat-tab" data-category="health">💪 Health</button>
+            </div>
         </section>
 
+        <!-- POMODORO TIMER -->
+        <section class="timer-section glass-inner">
+            <div class="timer-header">
+                <h3>⏱️ Focus Timer</h3>
+                <span class="timer-badge">Pomodoro</span>
+            </div>
+            <div class="timer-display">
+                <span id="timerMinutes">25</span>:<span id="timerSeconds">00</span>
+            </div>
+            <div class="timer-buttons">
+                <button id="timerStart" class="timer-btn start-btn">▶️ Start</button>
+                <button id="timerPause" class="timer-btn pause-btn">⏸️ Pause</button>
+                <button id="timerReset" class="timer-btn reset-btn">🔄 Reset</button>
+            </div>
+        </section>
+
+        <!-- AI SECTION -->
+        <section class="ai-section glass-inner">
+            <div class="ai-header">
+                <h3>🤖 AI Assistant</h3>
+                <span class="ai-badge">Smart Suggestions</span>
+            </div>
+            <div class="ai-input-group">
+                <input type="text" id="aiInput" placeholder="Ask AI to suggest tasks...">
+                <button id="aiButton">✨ Ask AI</button>
+            </div>
+            <div id="aiResponse" class="ai-response hidden">
+                <div class="ai-thinking hidden" id="aiThinking">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <p>AI is thinking...</p>
+                </div>
+                <div id="aiSuggestions" class="ai-suggestions"></div>
+            </div>
+        </section>
+
+        <!-- TASK LIST -->
         <section class="task-display">
             <h2>Your Tasks</h2>
             <ul id="taskList">
@@ -59,6 +141,7 @@
                 </li>
             </ul>
         </section>
+
     </div>
 
     <script src="script.js"></script>
